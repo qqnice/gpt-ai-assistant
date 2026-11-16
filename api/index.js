@@ -1,6 +1,7 @@
 import express from 'express';
 import { handleEvents, printFormattedHistories } from '../app/index.js';
 import config from '../config/index.js';
+import handleListMessages from './messages.js';
 import { validateLineSignature } from '../middleware/index.js';
 
 const app = express();
@@ -18,6 +19,8 @@ app.get('/', (req, res) => {
   }
   res.sendStatus(200);
 });
+
+app.get('/messages', handleListMessages);
 
 app.post(config.APP_WEBHOOK_PATH, validateLineSignature, async (req, res) => {
   try {

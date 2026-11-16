@@ -28,9 +28,11 @@ const config = Object.freeze({
   LINE_CHANNEL_ACCESS_TOKEN: env.LINE_CHANNEL_ACCESS_TOKEN || /** @deprecated since version 1.1.1 */ env.LINE_API_KEY || null,
   LINE_CHANNEL_SECRET: env.LINE_CHANNEL_SECRET || /** @deprecated since version 1.1.1 */ env.LINE_API_SECRET || null,
   MUSE_TAKEOVER: env.MUSE_TAKEOVER === 'true' || false,
-  GITHUB_TOKEN: env.GITHUB_TOKEN || null,
-  GITHUB_REPO: env.GITHUB_REPO || 'qqnice/gpt-ai-assistant',
-  GITHUB_BRANCH: env.GITHUB_BRANCH || null,
+  R2_ENDPOINT: env.R2_ENDPOINT || null,
+  R2_BUCKET: env.R2_BUCKET || null,
+  R2_ACCESS_KEY_ID: env.R2_ACCESS_KEY_ID || null,
+  R2_SECRET_ACCESS_KEY: env.R2_SECRET_ACCESS_KEY || null,
+  MUSE_READ_SECRET: env.MUSE_READ_SECRET || null,
 });
 
 export default config;

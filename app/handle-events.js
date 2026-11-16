@@ -1,5 +1,5 @@
 import config from '../config/index.js';
-import { saveMessageEvent } from '../services/github.js';
+import { saveMessageEvent } from '../services/r2.js';
 import { EVENT_TYPE_MESSAGE } from '../services/line.js';
 import { replyMessage } from '../utils/index.js';
 import {
