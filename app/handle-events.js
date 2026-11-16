@@ -1,3 +1,6 @@
+import config from '../config/index.js';
+import { saveMessageEvent } from '../services/github.js';
+import { EVENT_TYPE_MESSAGE } from '../services/line.js';
 import { replyMessage } from '../utils/index.js';
 import {
   execActivateCommand,
@@ -48,8 +51,17 @@ const handleContext = async (context) => (
     || context
 );
 
-const handleEvents = async (events = []) => (
-  Promise.all(
+const handleEvents = async (events = []) => {
+  const messageEvents = events.filter((event) => event.type === EVENT_TYPE_MESSAGE);
+  // Persist every incoming message before anything else. Saving is best
+  // effort: failures are logged inside saveMessageEvent and never break
+  // the webhook, so LINE always gets its 200.
+  await Promise.all(messageEvents.map((event) => saveMessageEvent(event)));
+
+  // When Muse has taken over, messages are stored only; the GPT bot stays silent.
+  if (config.MUSE_TAKEOVER) return [];
+
+  return Promise.all(
     (await Promise.all(
       (await Promise.all(
         events
@@ -62,7 +74,7 @@ const handleEvents = async (events = []) => (
     ))
       .filter((context) => context.messages.length > 0)
       .map((context) => replyMessage(context)),
-  )
-);
+  );
+};
 
 export default handleEvents;

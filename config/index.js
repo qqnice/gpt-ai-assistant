@@ -27,6 +27,10 @@ const config = Object.freeze({
   OPENAI_IMAGE_GENERATION_SIZE: env.OPENAI_IMAGE_GENERATION_SIZE || '256x256',
   LINE_CHANNEL_ACCESS_TOKEN: env.LINE_CHANNEL_ACCESS_TOKEN || /** @deprecated since version 1.1.1 */ env.LINE_API_KEY || null,
   LINE_CHANNEL_SECRET: env.LINE_CHANNEL_SECRET || /** @deprecated since version 1.1.1 */ env.LINE_API_SECRET || null,
+  MUSE_TAKEOVER: env.MUSE_TAKEOVER === 'true' || false,
+  GITHUB_TOKEN: env.GITHUB_TOKEN || null,
+  GITHUB_REPO: env.GITHUB_REPO || 'qqnice/gpt-ai-assistant',
+  GITHUB_BRANCH: env.GITHUB_BRANCH || null,
 });
 
 export default config;
